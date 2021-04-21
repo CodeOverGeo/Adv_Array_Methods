@@ -58,7 +58,12 @@ Examples:
        ]
 */
 
-function addKeyAndValue(arr, key, value) {}
+function addKeyAndValue(arr, key, value) {
+  return arr.reduce(function (newArr, nextValue, idx) {
+    newArr[idx][key] = value;
+    return newArr;
+  }, arr);
+}
 
 /*
 Write a function called partition which accepts an array and a callback and returns an array with two 
@@ -86,4 +91,16 @@ Examples:
     partition(names, isLongerThanThreeCharacters) // [['Elie', 'Colt', 'Matt'], ['Tim']]
 */
 
-function partition(arr, callback) {}
+function partition(arr, callback) {
+  return arr.reduce(
+    function (numArr, nextValue) {
+      if (callback(nextValue)) {
+        numArr[0].push(nextValue);
+      } else {
+        numArr[1].push(nextValue);
+      }
+      return numArr;
+    },
+    [[], []]
+  );
+}
